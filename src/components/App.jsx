@@ -1,5 +1,3 @@
-import fetchMovies from 'services/fetch';
-
 export const App = () => {
   return (
     <div
