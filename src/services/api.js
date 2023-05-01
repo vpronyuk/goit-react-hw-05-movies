@@ -1,11 +1,12 @@
 import axios from 'axios';
 import config from './config';
 
-export const fetchTrendingMovies = async () => {
+export const getTrendingMovies = async () => {
   try {
     const response = await axios.get(
       `${config.BASE_URL}/trending/movie/week?api_key=${config.API_KEY}`
     );
+    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     console.log('Fetch error:', error);
@@ -13,7 +14,7 @@ export const fetchTrendingMovies = async () => {
   }
 };
 
-export const searchMovies = async query => {
+export const getSearchedMovies = async query => {
   try {
     const response = await axios.get(
       `${config.BASE_URL}/search/movie?api_key=${config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
@@ -25,7 +26,7 @@ export const searchMovies = async query => {
   }
 };
 
-export const fetchMovieDetails = async movieId => {
+export const getMovieDetails = async movieId => {
   try {
     const response = await axios.get(
       `${config.BASE_URL}/movie/${movieId}?api_key=${config.API_KEY}&language=en-US`
@@ -37,7 +38,7 @@ export const fetchMovieDetails = async movieId => {
   }
 };
 
-export const fetchMovieCredits = async movieId => {
+export const getMovieCast = async movieId => {
   try {
     const response = await axios.get(
       `${config.BASE_URL}/movie/${movieId}/credits?api_key=${config.API_KEY}&language=en-US`
@@ -49,7 +50,7 @@ export const fetchMovieCredits = async movieId => {
   }
 };
 
-export const fetchMovieReviews = async movieId => {
+export const getMovieReviews = async movieId => {
   try {
     const response = await axios.get(
       `${config.BASE_URL}/movie/${movieId}/reviews?api_key=${config.API_KEY}&language=en-US&page=1`
