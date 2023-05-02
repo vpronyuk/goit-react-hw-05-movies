@@ -1,34 +1,39 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { FiSearch } from 'react-icons/fi';
+import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSubmit }) => {
-  const [queryOnChange, setQueryOnChange] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('name') ?? '';
 
   const handleChange = evt => {
-    setQueryOnChange(evt.target.value);
+    const name = evt.target.value;
+    const nextParams = name !== '' ? { name } : {};
+    setSearchParams(nextParams);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    if (queryOnChange.trim() === '') {
-      return;
-    }
-    onSubmit(queryOnChange.trim());
-    setQueryOnChange('');
-    console.log(onSubmit(queryOnChange));
+    onSubmit(query);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.searchBox}>
       <input
         type="text"
         onChange={handleChange}
         autoComplete="off"
-        name="search"
-        value={queryOnChange}
+        name=""
+        value={query}
         autoFocus
         placeholder="Search movies"
+        className={css.searchInput}
       />
-      <button type="submit">Search</button>
+      <button type="submit" className={css.searchButton}>
+        <b className={css.materialIcons}>
+          <FiSearch />
+        </b>
+      </button>
     </form>
   );
 };
