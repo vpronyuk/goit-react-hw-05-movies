@@ -1,7 +1,8 @@
-import * as API from 'services/api';
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+import * as API from 'services/api';
+import css from './Cast.module.css';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
@@ -28,28 +29,29 @@ const Cast = () => {
   return (
     <div>
       <h2>Movie Cast</h2>
-      {castInfo.map(({ id, profile_path, name, character }) => (
-        <div key={id}>
-          {profile_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w300${profile_path}`}
-              alt={name}
-            />
-          ) : (
-            <img
-              src={`https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg`}
-              alt={name}
-            />
-          )}
-          <div>
-            <h3>{name}</h3>
+      <ul className={css.castList}>
+        {castInfo.map(({ id, profile_path, name, character }) => (
+          <li key={id} className={css.castListItem}>
+            {profile_path ? (
+              <img
+                className={css.castPoster}
+                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                alt={name}
+              />
+            ) : (
+              <img
+                className={css.castPoster}
+                src={`https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg`}
+                alt={name}
+              />
+            )}
             <div>
-              Character:
-              <div>{character}</div>
+              <h2 className={css.castTitle}>{name}</h2>
+              <p className={css.castCharacter}>Character: {character}</p>
             </div>
-          </div>
-        </div>
-      ))}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

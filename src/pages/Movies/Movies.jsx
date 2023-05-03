@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import css from './Movies.module.css';
 
 import * as API from 'services/api';
 
@@ -34,8 +35,9 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <h2>Movies</h2>
+    <div className={css.container}>
+      <div className={css.title}>Search Your Movies here..</div>
+      {/* <div className={css.subTitle}>Click on Search button..</div> */}
       <SearchForm onSubmit={handleSubmit} query={query} />
       {movies.length > 0 && <MovieList movies={movies} />}
     </div>

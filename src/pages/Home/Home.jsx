@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import * as API from 'services/api';
+import css from './Home.module.css';
 
 import MoviesList from 'components/movieList/MovieList';
 
-import { Container, Title, ErrorMessage, LoadingMessage } from './Home.styled';
+// import { Container, Title, ErrorMessage, LoadingMessage } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -25,12 +26,15 @@ const Home = () => {
   }, []);
 
   return (
-    <Container>
-      <Title>Trending Movies of the Week</Title>
-      {loading && <LoadingMessage>Loading...</LoadingMessage>}
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+    <div className={css.container}>
+      <div className={css.title}>
+        <h2>Trending Movies</h2>
+        {/* <h2>Trending Movies</h2> */}
+      </div>
+      {loading && <div className={css.loadingMessage}>Loading...</div>}
+      {error && <div className={css.errorMessage}>{error}</div>}
       {!loading && !error && <MoviesList movies={movies} />}
-    </Container>
+    </div>
   );
 };
 

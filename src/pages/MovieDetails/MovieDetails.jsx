@@ -1,5 +1,6 @@
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
+import css from './MovieDetails.module.css';
 
 import * as API from 'services/api';
 
@@ -22,39 +23,54 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <div className={css.detailsContainer}>
       {movieInfo && (
         <>
-          <div>Movie Details page</div>
-          <Link to={backLink}>Go back</Link>
+          <div className={css.title}>Movie Details page</div>
+          <Link className={css.backLink} to={backLink}>
+            Go back
+          </Link>
           {movieInfo.poster_path ? (
             <img
+              className={css.poster}
               src={`https://image.tmdb.org/t/p/w780${movieInfo.poster_path}`}
               alt={movieInfo.title}
             />
           ) : (
             <img
+              className={css.poster}
               src={`https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg`}
               alt={movieInfo.title}
             />
           )}
-          {movieInfo.title} ({movieInfo.release_date?.slice(0, 4)}) User Score:
-          &nbsp; // {Math.round(movieInfo.vote_average * 10)}%
-          <div>Overview</div>
-          <div>{movieInfo.overview}</div>
+          <div className={css.title}>
+            {movieInfo.title} ({movieInfo.release_date?.slice(0, 4)})
+          </div>
+          <div className={css.userScore}>
+            User Score: &nbsp; {Math.round(movieInfo.vote_average * 10)}%
+          </div>
+
+          <div className={css.overviewTitle}>Overview</div>
+          <div className={css.overview}>{movieInfo.overview}</div>
           {movieInfo.genres && (
             <>
-              <h3>Genres:</h3>
-              <ul>
+              <div className={css.genresTitle}>Genres:</div>
+              <ul className={css.genresList}>
                 {movieInfo.genres.map(genre => (
                   <li key={genre.id}>{genre.name}</li>
                 ))}
               </ul>
             </>
           )}
-          <div>Additional information</div>
-          <Link to={`cast`}>Cast</Link>
-          <Link to={`reviews`}>Reviews</Link>
+          <div className={css.additionalInfoTitle}>Additional information</div>
+          <div className={css.additionalInfoLinks}>
+            <Link className={css.additionalInfoLink} to={`cast`}>
+              Cast
+            </Link>
+            <Link className={css.additionalInfoLink} to={`reviews`}>
+              Reviews
+            </Link>
+          </div>
           <Suspense>
             <Outlet />
           </Suspense>

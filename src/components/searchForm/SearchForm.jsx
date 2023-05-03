@@ -1,5 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
+import PropTypes from 'prop-types';
+
 import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSubmit }) => {
@@ -36,6 +38,10 @@ const SearchForm = ({ onSubmit }) => {
       </button>
     </form>
   );
+};
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchForm;

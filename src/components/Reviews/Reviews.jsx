@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import * as API from 'services/api';
+import css from './Reviews.module.css';
 
 const Reviews = () => {
   const [reviewInfo, setReviewInfo] = useState([]);
@@ -26,11 +28,11 @@ const Reviews = () => {
   }
 
   return (
-    <ul>
+    <ul className={css.reviewList}>
       {reviewInfo.map(({ id, author, content }) => (
-        <li key={id}>
-          <h3>Author: {author}</h3>
-          <p>{content}</p>
+        <li key={id} className={css.review}>
+          <h3 className={css.author}>Author: {author}</h3>
+          <p className={css.content}>{content}</p>
         </li>
       ))}
     </ul>
