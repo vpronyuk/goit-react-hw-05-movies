@@ -4,8 +4,6 @@ import css from './Home.module.css';
 
 import MoviesList from 'components/movieList/MovieList';
 
-// import { Container, Title, ErrorMessage, LoadingMessage } from './Home.styled';
-
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +27,6 @@ const Home = () => {
     <div className={css.container}>
       <div className={css.title}>
         <h2>Trending Movies</h2>
-        {/* <h2>Trending Movies</h2> */}
       </div>
       {loading && <div className={css.loadingMessage}>Loading...</div>}
       {error && <div className={css.errorMessage}>{error}</div>}

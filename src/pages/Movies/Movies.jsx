@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import css from './Movies.module.css';
 
-import * as API from 'services/api';
+import * as API from '../../services/api';
 
 import MovieList from 'components/movieList/MovieList';
 import SearchForm from 'components/searchForm/SearchForm';

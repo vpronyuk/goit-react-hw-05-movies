@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import * as API from 'services/api';
+import * as API from '../../services/api';
 import css from './Cast.module.css';
 
 const Cast = () => {

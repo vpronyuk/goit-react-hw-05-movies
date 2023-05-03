@@ -2,7 +2,7 @@ import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import css from './MovieDetails.module.css';
 
-import * as API from 'services/api';
+import * as API from '../../services/api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
