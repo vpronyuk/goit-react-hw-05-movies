@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import * as API from '../../services/api';
-import css from './Reviews.module.css';
+import css from 'components/reviews/Reviews.module.css';
 
 const Reviews = () => {
   const [reviewInfo, setReviewInfo] = useState([]);
-  const [isReviewInfoLoaded, setIsReviewInfoLoaded] = useState(false);
+  // const [isReviewInfoLoaded, setIsReviewInfoLoaded] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Reviews = () => {
       try {
         const reviewResponse = await API.getMovieReviews(movieId);
         setReviewInfo(reviewResponse);
-        setIsReviewInfoLoaded(true);
+        // setIsReviewInfoLoaded(true);
       } catch (error) {
         console.log(error.message);
       }
@@ -23,16 +23,21 @@ const Reviews = () => {
     loadReviewInfo(movieId);
   }, [movieId]);
 
-  if (reviewInfo.length === 0 && isReviewInfoLoaded) {
-    return <h2>No reviews for this movie</h2>;
-  }
+  // if (reviewInfo.length === 0 && isReviewInfoLoaded) {
+  //   return <h2>No reviews for this movie</h2>;
+  // }
 
   return (
     <ul className={css.reviewList}>
       {reviewInfo.map(({ id, author, content }) => (
         <li key={id} className={css.review}>
           <h3 className={css.author}>Author: {author}</h3>
-          <p className={css.content}>{content}</p>
+          {content ? (
+            <p className={css.content}>{content}</p>
+          ) : (
+            <p>We don't have any reviews for this movie</p>
+          )}
+          {/* <p className={css.content}>{content}</p> */}
         </li>
       ))}
     </ul>
