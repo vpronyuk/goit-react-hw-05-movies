@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import * as API from 'services/api';
 import css from './Home.module.css';
 
-import MoviesList from 'components/movieList/MovieList';
+import MoviesList from 'components/movieListNew/MovieList';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
