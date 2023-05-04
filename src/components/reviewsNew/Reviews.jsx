@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import * as API from '../../services/api';
-import css from 'components/reviews/Reviews.module.css';
+import css from './Reviews.module.css';
 
 const Reviews = () => {
   const [reviewInfo, setReviewInfo] = useState([]);
