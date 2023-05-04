@@ -4,8 +4,8 @@ import css from './Movies.module.css';
 
 import * as API from '../../services/api';
 
-import MovieList from 'components/movieListNew/MovieList';
-import SearchForm from 'components/searchFormNew/SearchForm';
+import MovieList from 'components/movieList/MovieList';
+import SearchForm from 'components/searchForm/SearchForm';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
