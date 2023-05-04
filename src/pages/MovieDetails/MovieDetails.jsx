@@ -1,5 +1,5 @@
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import css from './MovieDetails.module.css';
 
 import * as API from '../../services/api';
@@ -8,7 +8,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
   const location = useLocation();
-  const backLink = location.state?.from ?? '/movies';
+  const backLink = useRef(location.state?.from ?? `/movies`);
 
   useEffect(() => {
     async function loadMovieById(movieId) {
@@ -27,7 +27,7 @@ const MovieDetails = () => {
       {movieInfo && (
         <>
           <div className={css.title}>Movie Details page</div>
-          <Link className={css.backLink} to={backLink}>
+          <Link className={css.backLink} to={backLink.current}>
             Go back
           </Link>
           {movieInfo.poster_path ? (
