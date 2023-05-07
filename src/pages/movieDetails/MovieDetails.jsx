@@ -6,9 +6,13 @@ import * as API from '../../services/api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const { state } = useLocation();
+  const backLink = useRef(state?.from ?? `/movies`);
+
   const [movieInfo, setMovieInfo] = useState({});
-  const location = useLocation();
-  const backLink = useRef(location.state?.from ?? `/movies`);
+
+  const defaultImage =
+    'https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg';
 
   useEffect(() => {
     async function loadMovieById(movieId) {
@@ -30,19 +34,17 @@ const MovieDetails = () => {
           <Link className={css.backLink} to={backLink.current}>
             Go back
           </Link>
-          {movieInfo.poster_path ? (
-            <img
-              className={css.poster}
-              src={`https://image.tmdb.org/t/p/w780${movieInfo.poster_path}`}
-              alt={movieInfo.title}
-            />
-          ) : (
-            <img
-              className={css.poster}
-              src={`https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg`}
-              alt={movieInfo.title}
-            />
-          )}
+
+          <img
+            className={css.poster}
+            src={
+              movieInfo.poster_path
+                ? `https://image.tmdb.org/t/p/w780${movieInfo.poster_path}`
+                : defaultImage
+            }
+            alt={movieInfo.title}
+          />
+
           <div className={css.title}>
             {movieInfo.title} ({movieInfo.release_date?.slice(0, 4)})
           </div>

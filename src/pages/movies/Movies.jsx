@@ -10,7 +10,7 @@ import SearchForm from 'components/searchForm/SearchForm';
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('query') ?? '');
+  const query = searchParams.get('query');
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -24,20 +24,16 @@ const Movies = () => {
         }
       }
     };
-
     fetchMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, setSearchParams]);
 
   const handleSubmit = query => {
-    setQuery(query);
-    setSearchParams(query !== '' ? { query } : {});
+    setSearchParams({ query });
   };
 
   return (
     <div className={css.container}>
       <div className={css.title}>Search Your Movies here..</div>
-      {/* <div className={css.subTitle}>Click on Search button..</div> */}
       <SearchForm onSubmit={handleSubmit} query={query} />
       {movies.length > 0 && <MovieList movies={movies} />}
     </div>

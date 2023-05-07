@@ -6,11 +6,15 @@ import css from './SearchForm.module.css';
 
 const SearchForm = ({ onSubmit }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('name') ?? '';
+  const query = searchParams.get('name') || '';
 
   const handleChange = evt => {
     const name = evt.target.value;
-    const nextParams = name !== '' ? { name } : {};
+    if (!name) {
+      alert('Name cannot be empty');
+      return;
+    }
+    const nextParams = { name };
     setSearchParams(nextParams);
   };
 

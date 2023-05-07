@@ -33,11 +33,6 @@ const Reviews = () => {
         {reviewInfo.map(({ id, author, content }) => (
           <li key={id} className={css.review}>
             <h3 className={css.author}>Author: {author}</h3>
-            {/* {content ? (
-              <p className={css.content}>{content}</p>
-            ) : (
-              <p>We don't have any reviews for this movie</p>
-            )} */}
             <p className={css.content}>{content}</p>
           </li>
         ))}
@@ -45,8 +40,6 @@ const Reviews = () => {
     </div>
   );
 };
-
-export default Reviews;
 
 Reviews.propTypes = {
   reviewInfo: PropTypes.arrayOf(
@@ -57,3 +50,5 @@ Reviews.propTypes = {
     })
   ),
 };
+
+export default Reviews;

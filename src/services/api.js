@@ -1,12 +1,13 @@
 import axios from 'axios';
-import config from './config';
+
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = 'd95cade1dc5c92803fa23ff687afbf7e';
 
 export const getTrendingMovies = async () => {
   try {
     const response = await axios.get(
-      `${config.BASE_URL}/trending/movie/week?api_key=${config.API_KEY}`
+      `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`
     );
-    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     console.log('Fetch error:', error);
@@ -17,7 +18,7 @@ export const getTrendingMovies = async () => {
 export const getSearchedMovies = async query => {
   try {
     const response = await axios.get(
-      `${config.BASE_URL}/search/movie?api_key=${config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+      `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
     );
     return response.data.results;
   } catch (error) {
@@ -29,7 +30,7 @@ export const getSearchedMovies = async query => {
 export const getMovieDetails = async movieId => {
   try {
     const response = await axios.get(
-      `${config.BASE_URL}/movie/${movieId}?api_key=${config.API_KEY}&language=en-US`
+      `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
     );
     return response.data;
   } catch (error) {
@@ -41,7 +42,7 @@ export const getMovieDetails = async movieId => {
 export const getMovieCast = async movieId => {
   try {
     const response = await axios.get(
-      `${config.BASE_URL}/movie/${movieId}/credits?api_key=${config.API_KEY}&language=en-US`
+      `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
     );
     return response.data.cast;
   } catch (error) {
@@ -53,7 +54,7 @@ export const getMovieCast = async movieId => {
 export const getMovieReviews = async movieId => {
   try {
     const response = await axios.get(
-      `${config.BASE_URL}/movie/${movieId}/reviews?api_key=${config.API_KEY}&language=en-US&page=1`
+      `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
     );
     return response.data.results;
   } catch (error) {

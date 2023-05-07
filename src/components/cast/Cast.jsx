@@ -8,6 +8,8 @@ const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
   const [isCastLoaded, setIsCastLoaded] = useState(false);
   const { movieId } = useParams();
+  const defaultImage =
+    'https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg';
 
   useEffect(() => {
     async function loadCastInfo(movieId) {
@@ -32,19 +34,15 @@ const Cast = () => {
       <ul className={css.castList}>
         {castInfo.map(({ id, profile_path, name, character }) => (
           <li key={id} className={css.castListItem}>
-            {profile_path ? (
-              <img
-                className={css.castPoster}
-                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
-                alt={name}
-              />
-            ) : (
-              <img
-                className={css.castPoster}
-                src={`https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg`}
-                alt={name}
-              />
-            )}
+            <img
+              className={css.castPoster}
+              src={
+                profile_path
+                  ? `https://image.tmdb.org/t/p/w300${profile_path}`
+                  : defaultImage
+              }
+              alt={name}
+            />
             <div>
               <h2 className={css.castTitle}>{name}</h2>
               <p className={css.castCharacter}>Character: {character}</p>
