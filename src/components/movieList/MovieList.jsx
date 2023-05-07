@@ -5,19 +5,25 @@ import css from './MovieList.module.css';
 
 const MoviesList = ({ movies }) => {
   const location = useLocation();
+  const defaultImage =
+    'https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg';
 
   return (
     <ul className={css.movieList}>
       {movies.map(({ id, title, release_date, poster_path }) => (
         <li key={id} className={css.movieListItem}>
           <Link
-            className={css.movieListItemLink}
-            state={{ from: location }}
             to={`/movies/${id}`}
+            state={{ from: location }}
+            className={css.movieListItemLink}
           >
             <img
               className={css.moviePoster}
-              src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w300${poster_path}`
+                  : defaultImage
+              }
               alt={title}
             />
             <h2 className={css.movieTitle}>{title}</h2>

@@ -7,8 +7,7 @@ import * as API from '../../services/api';
 const MovieDetails = () => {
   const { movieId } = useParams();
   const { state } = useLocation();
-  const backLink = useRef(state?.from ?? `/movies`);
-
+  const backLink = useRef(state?.from ?? '/movies');
   const [movieInfo, setMovieInfo] = useState({});
 
   const defaultImage =

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
 import css from './Movies.module.css';
 
 import * as API from '../../services/api';
@@ -17,7 +18,6 @@ const Movies = () => {
       if (query) {
         try {
           const data = await API.getSearchedMovies(query);
-          setSearchParams('');
           setMovies(data);
         } catch (error) {
           console.log(error);
@@ -33,7 +33,7 @@ const Movies = () => {
 
   return (
     <div className={css.container}>
-      <div className={css.title}>Search Your Movies here..</div>
+      <div className={css.title}>Find Your Movies here..</div>
       <SearchForm onSubmit={handleSubmit} query={query} />
       {movies.length > 0 && <MovieList movies={movies} />}
     </div>
